@@ -3,8 +3,8 @@ import pyautogui
 
 datas = input("Digite a data que voce quer fazer o encerrante:")
 nomeDoTecnico = input("Digite o nome do tecnico")
-cnpj = input("Digite o cnpj")
-cpf = input("Digite o cpf")
+cnpj = input("Digite o cnpj") # 14082324000120
+cpf = input("Digite o cpf")# 05401287674
 print("Posição da aba Encerrantes:")
 time.sleep(5)
 x1,y1 = pyautogui.position()
@@ -30,3 +30,14 @@ time.sleep(5)
 x5,y5 = pyautogui.position()
 print(x5,y5)
 input("Precione enter")
+
+with open("posicoes.txt","w") as f:
+    f.write(f"Data do Encerrante = ({datas})")
+    f.write(f"Nome do tecnico = ({nomeDoTecnico})")
+    f.write(f"CNPJ = ({cnpj})")
+    f.write(f"CPF = ({cpf})")
+    f.write(f"Posição da aba Encerrante = ({x1},{y1})")
+    f.write(f"Posição do Placeholder nome do pico = ({x2},{y2})")
+    f.write(f"Posição do Movimento = ({x3},{y3})")
+    f.write(f"Posição do botão Alterar Encerrante = ({x4},{y4})")
+    f.write(f"Posição do Obter valor correto (seta para baixo) = ({x5},{y5})")

@@ -4,23 +4,27 @@ from openpyxl import load_workbook
 import pyperclip
 from decimal import Decimal, ROUND_HALF_UP
 import PegarPosicoes as pos
+from pathlib import Path
 # shift +  tab ao invez de dar um salto para frente voce da um salto para traz
-
-wb = load_workbook("C:/Users/Master-Data/Desktop/ProjetoAutonomo/ProjetoAutonomo/ProjetoAutonomo/Comparação de Encerrantes.xlsx")
+PASTA_PROJETO = Path(__file__).parent
+CAMINHO_PLANILHA = PASTA_PROJETO / "Comparação de Encerrantes.xlsx"
+wb = load_workbook(CAMINHO_PLANILHA)
 aba = wb.active
 
 lista_bicos = []
 lista_nomes = []
 lista_diferenca = []
 lista_bicos_nomes = []
+execelInicio = input("Qual é o numero da linha inicial dos dados: ")
+execelFim = input("Qual é o numero da linha final dos dados: ")
 
-for linha in aba['A6':'A23']:
+for linha in aba['A'+execelInicio:'A'+execelFim]:
     celula = linha[0]
     lista_bicos.append(celula.value)
-for linha in aba['B6':'B23']:
+for linha in aba['B'+execelInicio:'B'+execelFim]:
     celula = linha[0]
     lista_nomes.append(celula.value)
-for linha in aba['F6':'F23']:
+for linha in aba['F'+execelInicio:'F'+execelFim]:
     celula = linha[0]
     lista_diferenca.append(celula.value)
 

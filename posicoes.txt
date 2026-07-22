@@ -1,0 +1,1 @@
+Data do Encerrante = (20072026)Nome do tecnico = (DERICK)CNPJ = (14082324000120)CPF = (05401287674)Posição da aba Encerrante = (100,48)Posição do Placeholder nome do pico = (300,113)Posição do Movimento = (290,224)Posição do botão Alterar Encerrante = (2269,970)Posição do Obter valor correto (seta para baixo) = (1706,433)
