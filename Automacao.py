@@ -15,9 +15,10 @@ lista_bicos = []
 lista_nomes = []
 lista_diferenca = []
 lista_bicos_nomes = []
-execelInicio = input("Qual é o numero da linha inicial dos dados: ")
-execelFim = input("Qual é o numero da linha final dos dados: ")
-datas = input("Digite a data que voce quer fazer o encerrante: ")
+execelInicio = input("Qual é o numero da linha inicial dos dados na TABELA: ")
+execelFim = input("Qual é o numero da linha final dos dados na TABELA: ")
+datas = input("Digite a DATA que voce quer fazer o encerrante: ")
+datas2 = input("Digite a DATA2 que voce quer fazer o encerrante: ")
 nomeDoTecnico = input("Digite o nome do tecnico: ")
 cnpj = input("Digite o cnpj: ")
 cpf = input("Digite o cpf: ")
@@ -53,7 +54,7 @@ pyautogui.click()
 while (bicoAtual < int(lista_bicos[-1])):
     pyautogui.click()
     time.sleep(1)
-    pyautogui.write(lista_bicos_nomes[bicoAtual])
+    pyautogui.write(lista_bicos_nomes[bicoAtual],1.00)
     time.sleep(1)
     pyautogui.press('tab')
     time.sleep(1)
@@ -61,7 +62,7 @@ while (bicoAtual < int(lista_bicos[-1])):
     time.sleep(1)
     pyautogui.press('tab')
     time.sleep(3)
-    pyautogui.write(datas)
+    pyautogui.write(datas2)
     time.sleep(1)
     pyautogui.press('tab')
     time.sleep(1)
