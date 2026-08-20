@@ -4,27 +4,27 @@ import re
 
 opcao = input("Salvamos as posições do seu monitor caso queira refazer digite ['y'] ou ['n']")
 if(opcao == 'y'):
-    print("Posição da aba Encerrantes:")
+    print("Posição da aba Encerrantes:") # Tela Encerrante
     time.sleep(5)
     x1,y1 = pyautogui.position()
     print(x1,y1)
     input("Precione enter")
-    print("Posicao do placeholder")
+    print("Posicao do placeholder") # Placeholder (Seria o campo onde podemos escolher o Bico de Combustivel)
     time.sleep(5)
     x2,y2 = pyautogui.position()
     print(x2,y2)
     input("Precione enter")
-    print("Posição Encerrante")
+    print("Posição Encerrante") # Encerrante seria o dado onde contem as colunas Data de Movimento, Fechamento Retaguarda, Numero do Movimento
     time.sleep(5)
     x3,y3 = pyautogui.position()
     print(x3,y3)
     input("Precione enter")
-    print("Posição do botão Alterar Encerrante")
+    print("Posição do botão Alterar Encerrante") # Botão Alterar Encerrante
     time.sleep(5)
     x4,y4 = pyautogui.position()
     print(x4,y4)
     input("Precione enter")
-    print("Posição do botão Pegar o valor correto (seta para baixo)")
+    print("Posição do botão Pegar o valor correto (seta para baixo)") # Essa seta ela vai aparecer quando você clica no botoa alterar encerrante ao lado direito do campo Encerrante inicial
     time.sleep(5)
     x5,y5 = pyautogui.position()
     print(x5,y5)

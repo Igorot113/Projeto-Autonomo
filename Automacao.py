@@ -23,32 +23,77 @@ nomeDoTecnico = input("Digite o nome do tecnico: ")
 cnpj = input("Digite o cnpj: ")
 cpf = input("Digite o cpf: ")
 
-for linha in aba['A'+execelInicio:'A'+execelFim]:
-    celula = linha[0]
-    lista_bicos.append(celula.value)
-for linha in aba['B'+execelInicio:'B'+execelFim]:
-    celula = linha[0]
-    lista_nomes.append(celula.value)
-for linha in aba['F'+execelInicio:'F'+execelFim]:
-    celula = linha[0]
-    lista_diferenca.append(celula.value)
+# Esse for e para pegar aquele valor da linha do execel que vamos pular.
+opcaoDeQuererPularLinhas = input("Nesse excel possui linhas que vão ser ignoradas? (S/N): ").upper()
+if(opcaoDeQuererPularLinhas == 'S'):
+    lista_linhas_Execel_Ignoradas = []
+    quantLinhasIgnoradas = int(input("Quantas linhas serao ignoradas: "))
+    for i in range(quantLinhasIgnoradas):
+        linhaIgnorada = int(input(f"Digite o  {i+1} número da linha do execel que vai ser ignorada: "))
+        lista_linhas_Execel_Ignoradas.append(linhaIgnorada)
 
-print(lista_bicos)
-print()
-print(lista_nomes)
-print()
-print(lista_diferenca)
-print()
-for item_x,item_y in zip(lista_bicos,lista_nomes):
-    combinacao = f"{item_x}-{item_y}"
-    lista_bicos_nomes.append(combinacao)
+    print(lista_linhas_Execel_Ignoradas)
+# Fim da lista das linhas ignoradas ================================
 
-print(lista_bicos_nomes)
+    for linha in aba['A'+execelInicio:'A'+execelFim]:
+        for linhaIgnorada in lista_linhas_Execel_Ignoradas:
+            if(linha == linhaIgnorada):
+                break
+        celula = linha[0]
+        lista_bicos.append(celula.value)
+
+    print(lista_bicos)
+
+    for linha in aba['B'+execelInicio:'B'+execelFim]:
+        for linhaIgnorada in lista_linhas_Execel_Ignoradas:
+            if(linha == lista_linhas_Execel_Ignoradas):
+                break
+        celula = linha[0]
+        lista_nomes.append(celula.value)
+
+    print(lista_nomes)
+
+    for linha in aba['F'+execelInicio:'F'+execelFim]:
+        for linhaIgnorada in lista_linhas_Execel_Ignoradas:
+            if(linha == lista_linhas_Execel_Ignoradas):
+                break
+        celula = linha[0]
+        lista_diferenca.append(celula.value)
+
+    print(lista_diferenca)
+
+    #Aqui estou juntando dois array lista_bicos e lista_nomes formando isso por exemplo: 10-GASOLINA COMUM e coloando isso na lista (lista_bicos_nomes)
+    for item_x,item_y in zip(lista_bicos,lista_nomes):
+        combinacao = f"{item_x}-{item_y}"
+        lista_bicos_nomes.append(combinacao)
+    #Fim da junção das duas lista e formando outra lista ========================
+
+    print(lista_bicos_nomes)
+    
+else:
+    for linha in aba['A'+execelInicio:'A'+execelFim]:
+        celula = linha[0]
+        lista_bicos.append(celula.value)
+    for linha in aba['B'+execelInicio:'B'+execelFim]:
+        celula = linha[0]
+        lista_nomes.append(celula.value)
+    for linha in aba['F'+execelInicio:'F'+execelFim]:
+        celula = linha[0]
+        lista_diferenca.append(celula.value)
+
+    #Aqui estou juntando dois array lista_bicos e lista_nomes formando isso por exemplo: 10-GASOLINA COMUM e coloando isso na lista (lista_bicos_nomes)
+    for item_x,item_y in zip(lista_bicos,lista_nomes):
+        combinacao = f"{item_x}-{item_y}"
+        lista_bicos_nomes.append(combinacao)
+    #Fim da junção das duas lista e formando outra lista ========================
+
 bicoAtual = 0 #padrao é 0
+input("Pronto para iniciar a automação ? (Dê Enter aqui)") # Uma trava aqui só para verificar se está tudo nos conformes (Caso não precise mais é só tirar)
 
-pyautogui.moveTo(pos.x1,pos.y1,1.00) # arrumar um jeito de resolver isso clicar em encerrantes em diferentes tipos de telas (95,41,1.00)
+# Automação começa aqui ============================
+pyautogui.moveTo(pos.x1,pos.y1,1.00)
 pyautogui.click()
-pyautogui.moveTo(pos.x2,pos.y2,1.00) # arrumar um jeito de resolver isso clicar em nomes em diferentes tipos de telas (232,108,1.00)
+pyautogui.moveTo(pos.x2,pos.y2,1.00)
 pyautogui.click()
 
 while (bicoAtual < int(lista_bicos[-1])):
