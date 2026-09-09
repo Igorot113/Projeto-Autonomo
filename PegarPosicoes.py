@@ -1,7 +1,9 @@
 import time
 import pyautogui
 import re
+from pathlib import Path
 
+arquivos_posicoes = Path(__file__).parent / "posicoes.txt"
 opcao = input("Salvamos as posições do seu monitor caso queira refazer digite ['y'] ou ['n']")
 if(opcao == 'y'):
     print("Posição da aba Encerrantes:") # Tela Encerrante
@@ -30,14 +32,14 @@ if(opcao == 'y'):
     print(x5,y5)
     input("Precione enter")
 
-    with open("posicoes.txt","w") as f:
+    with open(arquivos_posicoes,"w", encoding="utf-8") as f:
         f.write(f"{x1},{y1}\n")
         f.write(f"{x2},{y2}\n")
         f.write(f"{x3},{y3}\n")
         f.write(f"{x4},{y4}\n")
         f.write(f"{x5},{y5}\n")
 else:
-    with open("posicoes.txt","r",encoding="utf-8",errors="ignore") as f:
+    with open(arquivos_posicoes,"r",encoding="utf-8",errors="ignore") as f:
         linhas = f.readlines()
 
     x1,y1 = map(int,re.findall(r"\d+",linhas[0]))

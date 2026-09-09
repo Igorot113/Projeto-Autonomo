@@ -7,7 +7,7 @@ import PegarPosicoes as pos
 from pathlib import Path
 # shift +  tab ao invez de dar um salto para frente voce da um salto para traz
 PASTA_PROJETO = Path(__file__).parent
-CAMINHO_PLANILHA = PASTA_PROJETO / "Comparação de Encerrantes.xlsx"
+CAMINHO_PLANILHA = PASTA_PROJETO / "Planilhas" / "Comparação de Encerrantes.xlsx"
 wb = load_workbook(CAMINHO_PLANILHA)
 aba = wb.active
 
@@ -36,10 +36,9 @@ if(opcaoDeQuererPularLinhas == 'S'):
 # Fim da lista das linhas ignoradas ================================
 
     for linha in aba['A'+execelInicio:'A'+execelFim]:
-        for linhaIgnorada in lista_linhas_Execel_Ignoradas:
-            if(linha == linhaIgnorada):
-                break
         celula = linha[0]
+        if celula.row in lista_linhas_Execel_Ignoradas:
+                continue
         lista_bicos.append(celula.value)
 
     print(lista_bicos)
