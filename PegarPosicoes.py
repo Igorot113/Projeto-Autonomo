@@ -42,8 +42,8 @@ else:
     with open(arquivos_posicoes,"r",encoding="utf-8",errors="ignore") as f:
         linhas = f.readlines()
 
-    x1,y1 = map(int,re.findall(r"\d+",linhas[0]))
-    x2,y2 = map(int,re.findall(r"\d+",linhas[1]))
-    x3,y3 = map(int,re.findall(r"\d+",linhas[2]))
-    x4,y4 = map(int,re.findall(r"\d+",linhas[3]))
-    x5,y5 = map(int,re.findall(r"\d+",linhas[4]))
+    x1,y1 = map(int,re.findall(r"-?\d+",linhas[0]))
+    x2,y2 = map(int,re.findall(r"-?\d+",linhas[1]))
+    x3,y3 = map(int,re.findall(r"-?\d+",linhas[2]))
+    x4,y4 = map(int,re.findall(r"-?\d+",linhas[3]))
+    x5,y5 = map(int,re.findall(r"-?\d+",linhas[4]))
