@@ -15,6 +15,7 @@ lista_bicos = []
 lista_nomes = []
 lista_diferenca = []
 lista_bicos_nomes = []
+lista_linhas_Execel_Ignoradas = []
 execelInicio = input("Qual é o numero da linha inicial dos dados na TABELA: ")
 execelFim = input("Qual é o numero da linha final dos dados na TABELA: ")
 datas = input("Digite a DATA que voce quer fazer o encerrante: ")
@@ -25,66 +26,42 @@ cpf = input("Digite o cpf: ")
 
 # Esse for e para pegar aquele valor da linha do execel que vamos pular.
 opcaoDeQuererPularLinhas = input("Nesse excel possui linhas que vão ser ignoradas? (S/N): ").upper()
+
 if(opcaoDeQuererPularLinhas == 'S'):
-    lista_linhas_Execel_Ignoradas = []
     quantLinhasIgnoradas = int(input("Quantas linhas serao ignoradas: "))
     for i in range(quantLinhasIgnoradas):
         linhaIgnorada = int(input(f"Digite o  {i+1} número da linha do execel que vai ser ignorada: "))
         lista_linhas_Execel_Ignoradas.append(linhaIgnorada)
-
-    print(lista_linhas_Execel_Ignoradas)
+print(lista_linhas_Execel_Ignoradas)
 # Fim da lista das linhas ignoradas ================================
 
-    for linha in aba['A'+execelInicio:'A'+execelFim]:
-        celula = linha[0]
-        if celula.row in lista_linhas_Execel_Ignoradas:
-                continue
-        lista_bicos.append(celula.value)
+for linha in aba['A'+execelInicio:'A'+execelFim]:
+    celula = linha[0]
+    if celula.row in lista_linhas_Execel_Ignoradas:
+        continue
+    lista_bicos.append(celula.value)
+print("Bicos:", lista_bicos)
 
-    print(lista_bicos)
+for linha in aba['B'+execelInicio:'B'+execelFim]:
+    celula = linha[0]
+    if linha == lista_linhas_Execel_Ignoradas:
+        continue
+    lista_nomes.append(celula.value)
+print("Nomes: ", lista_nomes)
 
-    for linha in aba['B'+execelInicio:'B'+execelFim]:
-        for linhaIgnorada in lista_linhas_Execel_Ignoradas:
-            if(linha == lista_linhas_Execel_Ignoradas):
-                break
-        celula = linha[0]
-        lista_nomes.append(celula.value)
+for linha in aba['F'+execelInicio:'F'+execelFim]:
+    celula = linha[0]
+    if(linha == lista_linhas_Execel_Ignoradas):
+        continue
+    lista_diferenca.append(celula.value)
+print("Diferença:", lista_diferenca)
 
-    print(lista_nomes)
-
-    for linha in aba['F'+execelInicio:'F'+execelFim]:
-        for linhaIgnorada in lista_linhas_Execel_Ignoradas:
-            if(linha == lista_linhas_Execel_Ignoradas):
-                break
-        celula = linha[0]
-        lista_diferenca.append(celula.value)
-
-    print(lista_diferenca)
-
-    #Aqui estou juntando dois array lista_bicos e lista_nomes formando isso por exemplo: 10-GASOLINA COMUM e coloando isso na lista (lista_bicos_nomes)
-    for item_x,item_y in zip(lista_bicos,lista_nomes):
-        combinacao = f"{item_x}-{item_y}"
-        lista_bicos_nomes.append(combinacao)
-    #Fim da junção das duas lista e formando outra lista ========================
-
-    print(lista_bicos_nomes)
-    
-else:
-    for linha in aba['A'+execelInicio:'A'+execelFim]:
-        celula = linha[0]
-        lista_bicos.append(celula.value)
-    for linha in aba['B'+execelInicio:'B'+execelFim]:
-        celula = linha[0]
-        lista_nomes.append(celula.value)
-    for linha in aba['F'+execelInicio:'F'+execelFim]:
-        celula = linha[0]
-        lista_diferenca.append(celula.value)
-
-    #Aqui estou juntando dois array lista_bicos e lista_nomes formando isso por exemplo: 10-GASOLINA COMUM e coloando isso na lista (lista_bicos_nomes)
-    for item_x,item_y in zip(lista_bicos,lista_nomes):
-        combinacao = f"{item_x}-{item_y}"
-        lista_bicos_nomes.append(combinacao)
-    #Fim da junção das duas lista e formando outra lista ========================
+#Aqui estou juntando dois array lista_bicos e lista_nomes formando isso por exemplo: 10-GASOLINA COMUM e coloando isso na lista (lista_bicos_nomes)
+for item_x,item_y in zip(lista_bicos,lista_nomes):
+    combinacao = f"{item_x}-{item_y}"
+    lista_bicos_nomes.append(combinacao)
+print(lista_bicos_nomes)
+#Fim da junção das duas lista e formando outra lista ========================
 
 bicoAtual = 0 #padrao é 0
 input("Pronto para iniciar a automação ? (Dê Enter aqui)") # Uma trava aqui só para verificar se está tudo nos conformes (Caso não precise mais é só tirar)
