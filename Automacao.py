@@ -15,7 +15,7 @@ lista_bicos = []
 lista_nomes = []
 lista_diferenca = []
 lista_bicos_nomes = []
-lista_linhas_Execel_Ignoradas = []
+lista_linhas_Excel_Segunda_Forma = []
 execelInicio = input("Qual é o numero da linha inicial dos dados na TABELA: ")
 execelFim = input("Qual é o numero da linha final dos dados na TABELA: ")
 datas = input("Digite a DATA que voce quer fazer o encerrante: ")
@@ -25,34 +25,28 @@ cnpj = input("Digite o cnpj: ")
 cpf = input("Digite o cpf: ")
 
 # Esse for e para pegar aquele valor da linha do execel que vamos pular.
-opcaoDeQuererPularLinhas = input("Nesse excel possui linhas que vão ser ignoradas? (S/N): ").upper()
+opcaoDaSegundaForma = input("Nesse excel possui linhas que precisar ser executada em segunda forma? (S/N): ").upper()
 
-if(opcaoDeQuererPularLinhas == 'S'):
-    quantLinhasIgnoradas = int(input("Quantas linhas serao ignoradas: "))
-    for i in range(quantLinhasIgnoradas):
-        linhaIgnorada = int(input(f"Digite o  {i+1} número da linha do execel que vai ser ignorada: "))
-        lista_linhas_Execel_Ignoradas.append(linhaIgnorada)
-print(lista_linhas_Execel_Ignoradas)
+if(opcaoDaSegundaForma == 'S'):
+    quantLinhas = int(input("Total de linhas serao ignoradas: "))
+    for i in range(quantLinhas):
+        linhaQueVaiSerExecutadoEmSegundaForma = int(input(f"Digite o  {i+1} número da linha do execel que vai ser ignorada: "))
+        lista_linhas_Excel_Segunda_Forma.append(aba.cell(row=linhaQueVaiSerExecutadoEmSegundaForma, column=1).value)
+print(lista_linhas_Excel_Segunda_Forma)
 # Fim da lista das linhas ignoradas ================================
 
 for linha in aba['A'+execelInicio:'A'+execelFim]:
     celula = linha[0]
-    if celula.row in lista_linhas_Execel_Ignoradas:
-        continue
     lista_bicos.append(celula.value)
 print("Bicos:", lista_bicos)
 
 for linha in aba['B'+execelInicio:'B'+execelFim]:
     celula = linha[0]
-    if linha == lista_linhas_Execel_Ignoradas:
-        continue
     lista_nomes.append(celula.value)
 print("Nomes: ", lista_nomes)
 
 for linha in aba['F'+execelInicio:'F'+execelFim]:
     celula = linha[0]
-    if(linha == lista_linhas_Execel_Ignoradas):
-        continue
     lista_diferenca.append(celula.value)
 print("Diferença:", lista_diferenca)
 
@@ -75,7 +69,11 @@ pyautogui.click()
 while (bicoAtual < int(lista_bicos[-1])):
     pyautogui.click()
     time.sleep(1)
-    pyautogui.write(lista_bicos_nomes[bicoAtual],1.00)
+    if lista_bicos[bicoAtual] in lista_linhas_Excel_Segunda_Forma:
+        pyautogui.write(lista_bicos[bicoAtual]+"-")
+        pyautogui.press('end')
+    else:
+        pyautogui.write(lista_bicos_nomes[bicoAtual],1.00)
     time.sleep(1)
     pyautogui.press('tab')
     time.sleep(1)
